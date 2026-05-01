@@ -15,7 +15,7 @@ FTP_CONFIG = {
     "file": "/www.geotronica.it/ftp/BROZOLO/Brozolo esempio.csv"
 }
 
-DB_URL = "postgresql://postgres:admin@localhost:5432/Brozolo"
+DB_URL = "st.secrets["db_url"]
 TARGET_TABLE = "tabella_dati_ftp"
 
 # --- 2. FUNZIONI TECNICHE (IL "MOTORE" DELL'APPLICAZIONE) ---
