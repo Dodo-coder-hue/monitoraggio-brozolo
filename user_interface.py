@@ -21,11 +21,11 @@ TARGET_TABLE = "tabella_dati_ftp"
 # --- 2. FUNZIONI TECNICHE (IL "MOTORE" DELL'APPLICAZIONE) ---
 
 def get_engine():
-    """
-    Crea il 'motore' di connessione SQLAlchemy. 
-    Serve per far dialogare Python con il server PostgreSQL utilizzando la stringa DB_URL.
-    """
-    return create_engine(DB_URL)
+    """Crea la connessione pulendo la stringa dai Secrets"""
+    import sqlalchemy
+    # Recuperiamo la stringa e puliamola da eventuali spazi invisibili
+    url = st.secrets["db_url"].strip()
+    return sqlalchemy.create_engine(url)
 
 def carica_da_ftp():
     """
