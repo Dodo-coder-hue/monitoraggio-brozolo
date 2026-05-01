@@ -21,21 +21,16 @@ TARGET_TABLE = "tabella_dati_ftp"
 # --- 2. FUNZIONI TECNICHE (IL "MOTORE" DELL'APPLICAZIONE) ---
 
 def get_engine():
-    """Connessione semplificata per bypassare l'errore della porta"""
-    import sqlalchemy
-    
-    # Recuperiamo SOLO la password dai Secrets per sicurezza
+    # Leggiamo i dati dai Secrets di Streamlit
+    user = st.secrets["db_user"]
     password = st.secrets["db_pass"]
+    host = st.secrets["db_host"]
+    port = st.secrets["db_port"]  # Streamlit lo legge dal TOML
+    database = st.secrets["db_name"]
     
-    # Scriviamo il resto dell'indirizzo direttamente qui
-    # Usiamo l'indirizzo del Pooler (6543) che è il più stabile
-    user = "postgres"
-    host = "://supabase.com"
-    port = 6543
-    db = "postgres"
-    
-    url = f"postgresql://{user}:{password}@{host}:{port}/{db}?pgbouncer=true"
-    return sqlalchemy.create_engine(url)
+    # Costruiamo la stringa.
+    conn_url = f"postgresql://{user}:{password}@{host}:{port}/{database}?pgbouncer=true"
+    return sqlalchemy.create_engine(conn_url)
 
 
 
