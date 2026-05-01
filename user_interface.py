@@ -16,7 +16,7 @@ FTP_CONFIG = {
     "file": "/www.geotronica.it/ftp/BROZOLO/Brozolo esempio.csv"
 }
 
-DB_URL = st.secrets["db_url"]
+DB_URL = st.secrets["db_url"].strip()
 TARGET_TABLE = "tabella_dati_ftp"
 
 # --- 2. FUNZIONI TECNICHE (IL "MOTORE" DELL'APPLICAZIONE) ---
