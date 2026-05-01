@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import sqlalchemy
 from sqlalchemy import create_engine, text
 import ftplib
 import io
