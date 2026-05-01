@@ -28,11 +28,14 @@ def get_engine():
     port = int(st.secrets["db_port"])
     db = st.secrets["db_name"]
     
-       
-    conn_url = f"postgresql://{u}:{p}@{h}:{port}/{db}?pgbouncer=true"
-    return sqlalchemy.create_engine(conn_url)
-
-
+    # URL pulito senza parametri strani alla fine
+    conn_url = f"postgresql://{u}:{p}@{h}:{port}/{db}"
+    
+    # Passiamo il parametro pgbouncer in modo che il driver lo accetti correttamente
+    return sqlalchemy.create_engine(
+        conn_url, 
+        connect_args={'options': '-c pgbouncer=true'}
+    )
 
 
 
