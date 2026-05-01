@@ -21,17 +21,17 @@ TARGET_TABLE = "tabella_dati_ftp"
 # --- 2. FUNZIONI TECNICHE (IL "MOTORE" DELL'APPLICAZIONE) ---
 
 def get_engine():
-    user = st.secrets["db_user"]
-    password = st.secrets["db_pass"]
-    host = st.secrets["db_host"]
-    database = st.secrets["db_name"]
-
-    # Gestione sicura della porta
-    port = st.secrets.get("db_port", 5432)
-    port = int(port) if str(port).strip() else 5432
-
-    conn_url = f"postgresql://{user}:{password}@{host}:{port}/{database}?pgbouncer=true"
+    import sqlalchemy
+    u = st.secrets["db_user"]
+    p = st.secrets["db_pass"]
+    h = st.secrets["db_host"]
+    port = int(st.secrets["db_port"])
+    db = st.secrets["db_name"]
+    
+       
+    conn_url = f"postgresql://{u}:{p}@{h}:{port}/{db}"
     return sqlalchemy.create_engine(conn_url)
+
 
 
 
