@@ -21,21 +21,22 @@ TARGET_TABLE = "tabella_dati_ftp"
 # --- 2. FUNZIONI TECNICHE (IL "MOTORE" DELL'APPLICAZIONE) ---
 
 def get_engine():
-    """Connessione blindata con conversione manuale della porta"""
+    """Connessione semplificata per bypassare l'errore della porta"""
     import sqlalchemy
     
-    # Prendiamo i dati dai Secrets
-    u = st.secrets["db_user"]
-    p = st.secrets["db_pass"]
-    h = st.secrets["db_host"]
-    db = st.secrets["db_name"]
+    # Recuperiamo SOLO la password dai Secrets per sicurezza
+    password = st.secrets["db_pass"]
     
-    # FORZIAMO la porta a essere un numero intero, pulendola da ogni spazio
-    porta = int(str(st.secrets["db_port"]).strip())
+    # Scriviamo il resto dell'indirizzo direttamente qui
+    # Usiamo l'indirizzo del Pooler (6543) che è il più stabile
+    user = "postgres"
+    host = "://supabase.com"
+    port = 6543
+    db = "postgres"
     
-    # Costruiamo l'URL
-    url = f"postgresql://{u}:{p}@{h}:{porta}/{db}?pgbouncer=true"
+    url = f"postgresql://{user}:{password}@{host}:{port}/{db}?pgbouncer=true"
     return sqlalchemy.create_engine(url)
+
 
 
 
