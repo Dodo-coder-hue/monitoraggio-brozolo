@@ -21,11 +21,13 @@ TARGET_TABLE = "tabella_dati_ftp"
 # --- 2. FUNZIONI TECNICHE (IL "MOTORE" DELL'APPLICAZIONE) ---
 
 def get_engine():
-    """Crea la connessione pulendo la stringa dai Secrets"""
+    """Crea la connessione pulendo la stringa dai Secrets per evitare errori di tipo dato"""
+    # Importiamo sqlalchemy internamente per sicurezza
     import sqlalchemy
-    # Recuperiamo la stringa e puliamola da eventuali spazi invisibili
-    url = st.secrets["db_url"].strip()
-    return sqlalchemy.create_engine(url)
+    # Recuperiamo la stringa dai secrets e usiamo .strip() per eliminare spazi o invii invisibili
+    connection_url = st.secrets["db_url"].strip()
+    return sqlalchemy.create_engine(connection_url)
+
 
 def carica_da_ftp():
     """
