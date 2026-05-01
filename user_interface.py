@@ -21,12 +21,10 @@ URL_FINALE = st.secrets["db_url"].strip()
 TARGET_TABLE = "tabella_dati_ftp"
 
 # --- 2. FUNZIONI TECNICHE (IL "MOTORE" DELL'APPLICAZIONE) ---
-
 def get_engine():
-    def get_engine():
-    """Crea la connessione usando la stringa già pulita"""
-    import sqlalchemy
-    return sqlalchemy.create_engine(URL_FINALE)
+        """Crea la connessione usando la stringa già pulita"""
+        import sqlalchemy
+        return sqlalchemy.create_engine(URL_FINALE)
 
 
 def carica_da_ftp():
