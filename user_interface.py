@@ -21,10 +21,21 @@ URL_FINALE = st.secrets["db_url"].strip()
 TARGET_TABLE = "tabella_dati_ftp"
 
 # --- 2. FUNZIONI TECNICHE (IL "MOTORE" DELL'APPLICAZIONE) ---
+
 def get_engine():
-        """Crea la connessione usando la stringa già pulita"""
-        import sqlalchemy
-        return sqlalchemy.create_engine(URL_FINALE)
+    """Connessione robusta che evita l'errore di conversione della porta"""
+    import sqlalchemy
+    # Recuperiamo i singoli pezzi dai Secrets
+    user = st.secrets["db_user"]
+    pw = st.secrets["db_pass"]
+    host = st.secrets["db_host"]
+    port = st.secrets["db_port"]
+    db = st.secrets["db_name"]
+    
+    # Costruiamo la stringa in modo sicuro
+    url = f"postgresql://{user}:{pw}@{host}:{port}/{db}?pgbouncer=true"
+    return sqlalchemy.create_engine(url)
+
 
 
 def carica_da_ftp():
