@@ -23,7 +23,7 @@ TARGET_TABLE = "tabella_dati_ftp"
 # --- 2. FUNZIONI TECNICHE (IL "MOTORE" DELL'APPLICAZIONE) ---
 
 def get_engine():
-    """Connessione robusta che evita l'errore di conversione della porta"""
+    """Connessione robusta usando i segreti separati"""
     import sqlalchemy
     # Recuperiamo i singoli pezzi dai Secrets
     user = st.secrets["db_user"]
@@ -32,7 +32,7 @@ def get_engine():
     port = st.secrets["db_port"]
     db = st.secrets["db_name"]
     
-    # Costruiamo la stringa in modo sicuro
+    # Costruiamo la stringa di connessione
     url = f"postgresql://{user}:{pw}@{host}:{port}/{db}?pgbouncer=true"
     return sqlalchemy.create_engine(url)
 
