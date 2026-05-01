@@ -10,10 +10,10 @@ import plotly.express as px
 
 # --- 1. CONFIGURAZIONI ---
 FTP_CONFIG = {
-    "host": "ftp.geotronica.it",
-    "user": "4256589@aruba.it",
-    "pass": "@Birocco556",
-    "file": "/www.geotronica.it/ftp/BROZOLO/Brozolo esempio.csv"
+    "host": st.secrets["ftp_host"],
+    "user": st.secrets["ftp_user"],
+    "pass": st.secrets["ftp_pass"],
+    "file": st.secrets["ftp_file"]
 }
 
 TARGET_TABLE = "tabella_dati_ftp"
