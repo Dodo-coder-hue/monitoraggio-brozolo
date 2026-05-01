@@ -29,7 +29,7 @@ def get_engine():
     db = st.secrets["db_name"]
     
        
-    conn_url = f"postgresql://{u}:{p}@{h}:{port}/{db}"
+    conn_url = f"postgresql://{u}:{p}@{h}:{port}/{db}?pgbouncer=true"
     return sqlalchemy.create_engine(conn_url)
 
 
