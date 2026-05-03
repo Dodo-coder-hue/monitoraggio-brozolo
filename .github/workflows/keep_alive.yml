@@ -1,0 +1,23 @@
+name: Keep Streamlit Alive
+
+on:
+  schedule:
+    # Esegue l'azione ogni 10 ore (cron: minuti ore giorno mese settimana)
+    - cron: '0 */10 * * *'
+  workflow_dispatch: # Permette anche di avviarlo a mano per test
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Commit vuoto
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit --allow-empty -m "Update per evitare sleep di Streamlit"
+          git push
