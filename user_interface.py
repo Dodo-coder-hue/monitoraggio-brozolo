@@ -237,8 +237,8 @@ else:
         dt_min = df_f.loc[idx_min, 'Data_misura'].strftime('%d/%m/%Y')
 
         # Visualizzazione label con font grande (HTML Inline)
-        st.markdown(f"📈 **Spostamento Massimo:** <span style='font-size:24px; color:#004a99;'>**{val_max} mm**</span> (rilevato il {dt_max})", unsafe_allow_html=True)
-        st.markdown(f"📉 **Spostamento Minimo:** <span style='font-size:24px; color:#d32f2f;'>**{val_min} mm**</span> (rilevato il {dt_min})", unsafe_allow_html=True)
+        st.markdown(f"📈 **Lettura Massima:** <span style='font-size:24px; color:#004a99;'>**{val_max} mm**</span> (rilevato il {dt_max})", unsafe_allow_html=True)
+        st.markdown(f"📉 **Lettura Minima:** <span style='font-size:24px; color:#d32f2f;'>**{val_min} mm**</span> (rilevato il {dt_min})", unsafe_allow_html=True)
         
         st.write("") 
 
